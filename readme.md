@@ -1,1 +1,1 @@
-No you laz cunts
+yan is gay
