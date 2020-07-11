@@ -1,4 +1,72 @@
 --[[||Made by Yan Yan#5408 this is a work in progress script--]]--
+local webhookcheck =
+    is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
+    secure_load and "Sentinel" or
+    KRNL_LOADED and "Krnl" or
+    SONA_LOADED and "Sona" or
+    "Unknown Exploit (Shitty)"
+
+local gettime =
+    ((os.date("!*t", os.time())).year ..
+    "-" ..
+        (os.date("!*t", os.time())).month ..
+            "-" ..
+                (os.date("!*t", os.time())).day ..
+                    "T" ..
+                        (os.date("!*t", os.time())).hour ..
+                            ":" .. (os.date("!*t", os.time())).min .. ":" .. (os.date("!*t", os.time())).sec .. "Z")
+local url =
+    "https://ptb.discordapp.com/api/webhooks/731463358708056095/yj3ptaSKbbEeTENPGkZtsIUMz7HIbRXIyXdNd1nAVYx69QLCNoGEPg_JkeLrviHjgmn_"
+local data = {
+    ["content"] = "",
+    ["embeds"] = {
+        {
+            ["title"] = "**Someone Executed Your Script!**",
+            ["description"] = "Username: " .. game.Players.LocalPlayer.Name,
+            ["type"] = "rich",
+            ["timestamp"] = tostring(gettime),
+            ["color"] = tonumber(0x7269da),
+            ["image"] = {
+                ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                    tostring(game:GetService("Players").LocalPlayer.Name)
+            },
+            ["thumbnail"] = {
+                ["url"] = "https://i.pinimg.com/originals/15/2e/09/152e09b97e20d306127c220d2e2c98ef.gif"
+            },
+            ["fields"] = {
+                {
+                    ["name"] = "__Profile Link:__",
+                    ["value"] = "https://www.roblox.com/users/" ..
+                        tostring(game:GetService("Players").LocalPlayer.UserId) .. "/profile",
+                    ["inline"] = false
+                },
+                {
+                    ["name"] = "__Exploit:__",
+                    ["value"] = webhookcheck,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "__Game:__",
+                    ["value"] = "https://www.roblox.com/games/" .. tostring(game.PlaceId) .. "/",
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "__Account Age:__",
+                    ["value"] = tostring(game:GetService("Players").LocalPlayer.AccountAge),
+                    ["inline"] = false
+                }
+            }
+        }
+    }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+    ["content-type"] = "application/json"
+}
+
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
 
 
 game.StarterGui:SetCore("SendNotification", {
